@@ -1,8 +1,8 @@
 import defaults from './options'
 
 function format (input, opt = defaults) {
-  if (opt.allowBlank && input == '') {
-    return ''
+  if (opt.allowBlank) {
+    return input
   }
 
   if (typeof input === 'number') {

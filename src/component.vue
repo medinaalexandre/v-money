@@ -16,8 +16,8 @@ export default {
   props: {
     value: {
       required: true,
-      type: [Number, String],
-      default: 0
+      type: [String],
+      default: null
     },
     masked: {
       type: Boolean,
