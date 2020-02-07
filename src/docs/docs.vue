@@ -16,15 +16,15 @@
     <div class="column col-6 col-sm-12">
       <money v-model="price" class="form-input input-lg" v-bind="config"></money>
     </div>
-    <div class="column col-6 col-sm-12">
-      <h3>{{price}}</h3>
-    </div>
+<!--    <div class="column col-6 col-sm-12">-->
+<!--      <h3>{{price}}</h3>-->
+<!--    </div>-->
   </div>
 
   <label>Directive</label>
   <div class="columns">
     <div class="column col-6 col-sm-12">
-      <input type="tel" v-money="config" v-model.lazy="priceDirective" class="form-input input-lg" style="text-align: right" />
+<!--      <input type="tel" v-money="config" v-model.lazy="priceDirective" class="form-input input-lg" style="text-align: right" />-->
     </div>
     <div class="column col-6 col-sm-12">
       <h3>{{priceDirective}}</h3>
@@ -34,7 +34,7 @@
   <label>Directive on Custom Component (TextField from <a href="https://vuetifyjs.com/components/text-fields">vuetify</a>)</label>
   <div class="columns">
     <div class="column col-6 col-sm-12">
-      <v-text-field v-money="config" v-model.lazy="priceVuetify"></v-text-field>
+<!--      <v-text-field v-money="config" v-model.lazy="priceVuetify"></v-text-field>-->
     </div>
     <div class="column col-6 col-sm-12">
       <h3>{{priceVuetify}}</h3>
@@ -113,9 +113,9 @@ export default {
       price: 1234.5,
       priceDirective: 5432.1,
       priceVuetify: 6789.10,
-      config: {decimal: ',', thousands: '.', prefix: 'R$ ', suffix: ' #', precision: 2, masked: false}
+      config: {decimal: ',', thousands: '.', prefix: 'R$ ', suffix: ' #', precision: 2, masked: false, allowBlank: true}
     }
-  }
+  },
 }
 </script>
 

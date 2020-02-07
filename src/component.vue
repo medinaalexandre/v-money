@@ -1,6 +1,7 @@
 <template lang="html">
     <input type="tel"
-           v-model="formattedValue"
+           @change="change"
+           :value="formattedValue"
            v-money="{precision, decimal, thousands, prefix, suffix, allowBlank}"
            class="v-money"/>
 </template>
@@ -8,7 +9,7 @@
 <script>
     import money from './directive'
     import defaults from './options'
-    import {onlyNumbers, unformat} from './utils'
+    import { onlyNumbers, unformat } from './utils'
 
     export default {
         name: 'Money',
@@ -42,18 +43,22 @@
                 default: () => defaults.allowBlank
             }
         },
-        directives: {money},
+        directives: { money },
         data() {
             return {
-                formattedValue: this.$props.value,
+                formattedValue: null,
             }
         },
-        watch: {
-            formattedValue(newValue, oldValue) {
-                if (oldValue !== newValue) {
-                    this.$emit('input', onlyNumbers(newValue))
+        beforeMount() {
+            this.formattedValue = this.$props.value;
+        },
+        methods: {
+            change(e) {
+                if (e.target.value !== this.$data.formattedValue) {
+                    this.formattedValue = e.target.value;
+                    this.$emit('input', onlyNumbers(this.formattedValue))
                 }
-            }
+            },
         },
     }
 </script>

@@ -1,6 +1,7 @@
 import {
     format, unformat, setCursor, event,
 } from './utils';
+
 import assign from './assign';
 import defaults from './options';
 
@@ -18,29 +19,33 @@ export default function (el, binding) {
         }
     }
 
-    el.onkeydown = function (e) {
+    function keydown(e) {
         const backspacePressed = e.which == 8 || e.which == 46;
-        const atEndPosition = (el.value.length - el.selectionEnd) === 0;
+        const atEndPosition = (el.value.length - el.selectionEnd - opt.suffix.length) === 0;
         if (opt.allowBlank && backspacePressed && atEndPosition && (unformat(el.value, 0) === 0)) {
             el.value = '';
             el.dispatchEvent(event('change')); // v-model.lazy
         }
-    };
+    }
 
-    el.oninput = function () {
+    function input() {
         let positionFromEnd = el.value.length - el.selectionEnd;
-
+        //
         el.value = format(el.value, opt);
         positionFromEnd = Math.max(positionFromEnd, opt.suffix.length); // right
         positionFromEnd = el.value.length - positionFromEnd;
         positionFromEnd = Math.max(positionFromEnd, opt.prefix.length + 1); // left
         setCursor(el, positionFromEnd);
         el.dispatchEvent(event('change')); // v-model.lazy
-    };
+    }
 
-    el.onfocus = function () {
+    function focus() {
         setCursor(el, el.value.length - opt.suffix.length);
-    };
+    }
 
-    el.oninput();
+    el.onkeydown = keydown;
+    el.oninput = input;
+    el.onfocus = focus;
+
+    input.call(el);
 }

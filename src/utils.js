@@ -58,12 +58,14 @@ function event(name) {
 
 
 function format(input, opt = defaults) {
+
     if (opt.allowBlank && (input === '' || input === null)) {
         return input;
     }
 
     const numbers = onlyNumbers(input);
     const currency = numbersToCurrency(numbers, opt.precision);
+    if (currency === 'NaN') return null;
     const parts = toStr(currency).split('.');
     let integer = parts[0];
     const decimal = parts[1];
