@@ -60,7 +60,7 @@ function event(name) {
 function format(input, opt = defaults) {
 
     if (opt.allowBlank && (input === '' || input === null)) {
-        return input;
+        return null;
     }
 
     const numbers = onlyNumbers(input);
