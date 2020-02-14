@@ -60,5 +60,10 @@
                 }
             },
         },
+        watch: {
+            value(newValue) {
+                this.formattedValue = newValue;
+            },
+        }
     }
 </script>

@@ -23,7 +23,7 @@ export default function (el, binding) {
         const backspacePressed = e.which == 8 || e.which == 46;
         const atEndPosition = (el.value.length - el.selectionEnd - opt.suffix.length) === 0;
         if (opt.allowBlank && backspacePressed && atEndPosition && (unformat(el.value, 0) === 0)) {
-            el.value = '';
+            el.value = null;
             el.dispatchEvent(event('change')); // v-model.lazy
         }
     }
