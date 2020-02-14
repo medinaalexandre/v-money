@@ -57,7 +57,7 @@
                 if (e.target.value !== this.$data.formattedValue) {
                     this.formattedValue = e.target.value;
                     const result = onlyNumbers(this.formattedValue);
-                    this.$emit('input', result !== "" ? result : null)
+                    this.$emit('input', result !== "" ? Number (result) : null)
                 }
             },
         },
